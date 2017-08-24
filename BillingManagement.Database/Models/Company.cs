@@ -15,4 +15,4 @@ namespace BillingManagement.Database.Models
         public virtual ICollection<Site> Sites { get; set; }
     }
 }
-}
+
