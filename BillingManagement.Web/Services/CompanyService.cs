@@ -75,7 +75,7 @@ namespace BillingManagement.Web.Services
             }).ToList();
         }
 
-        public bool CreateCompany(Company company)
+        public bool CreateCompany(string companyName)
         {
             throw new NotImplementedException();
         }

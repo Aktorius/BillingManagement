@@ -6,5 +6,6 @@ namespace BillingManagement.Business.Repositories
     public interface ICompanyRepository : IRepository<Company>
     {
         IEnumerable<Company> GetAllCompanies();
+        bool CompanyExists(string companyName);
     }
 }

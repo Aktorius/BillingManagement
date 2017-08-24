@@ -210,5 +210,52 @@ namespace BillingManagement.Unit.Tests.BillingManagement.Web.Services
             // Then
             Assert.IsTrue(success);
         }
+
+        [Test]
+        public void CreateCompany_Should_Throw_An_Exception_If_Model_Is_Null()
+        {
+            // Given
+            bool success = false;
+
+            // When
+            try
+            {
+                _companyService.CreateCompany(null);
+            }
+            catch (Exception e)
+            {
+                success = true;
+            }
+
+            // Then
+            Assert.IsTrue(success);
+        }
+
+        [Test]
+        public void CreateCompany_ShouldReturn_False_When_The_Company_Exists()
+        {
+            // Given
+
+            _companyRepositoryMock.Setup(x => x.CompanyExists(It.IsAny<string>())).Returns(true);
+
+            // When
+            var result = _companyService.CreateCompany("existing");
+
+            // Then
+            Assert.IsFalse(result);
+        }
+
+        [Test]
+        public void CreateCompany_Should_Return_True_When_Company_Creates()
+        {
+            // Given
+            _companyRepositoryMock.Setup(x => x.CompanyExists(It.IsAny<string>())).Returns(false);
+
+            // When
+            var result = _companyService.CreateCompany("company");
+
+            // Then
+            Assert.IsTrue(result);
+        }
     }
 }
