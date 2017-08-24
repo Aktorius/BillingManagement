@@ -1,0 +1,27 @@
+﻿@model BillingManagement.Web.Models.Company
+    
+<table class="hovertable">
+    <tr>
+        <th>Company Name</th>
+        <th>Sites</th>
+    </tr>
+    <tr>
+        <td>
+            @Html.LabelFor(model => model.Name)
+        </td>
+
+        <td>
+            <table class="hovertable">
+                @foreach (var site in Model.SitesList)
+                {
+                    @Html.Partial("_Site", site)
+                }
+                        
+                @Html.ActionLink("Add Site", "Create", "Sites")
+                        
+            </table>
+        </td>
+    </tr>
+    <tr>
+    </tr>
+</table>

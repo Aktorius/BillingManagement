@@ -1,0 +1,27 @@
+﻿@model BillingManagement.Web.Models.Billing
+    
+
+
+<tr>
+    <th>Billing Number</th>
+    <th>Date From</th>
+    <th>Date To</th>
+    <th>Notes</th>
+    <th>Actions</th>
+</tr>
+<tr>
+    <td>
+        @Html.LabelFor(model => model.BillingPhone)
+    </td>
+    <td>
+        @Model.DateFrom.ToString("dd/MM/yyyy")
+    </td>
+    <td>
+        @Model.DateTo.ToString("dd/MM/yyyy")
+    </td>
+    <td>
+
+        @Html.LabelFor(model => model.Notes)
+    </td>
+    <td></td>
+</tr>

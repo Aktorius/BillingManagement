@@ -1,12 +1,30 @@
 ﻿@model BillingManagement.Web.Models.Site
     
 
-    <li>
-        <div>
-            @Model.Name
-        </div>
-        <div>
-            Main Site: @Model.MainSite ? "Yes" : "No"
-        </div>
-    </li>
+<tr>
+    <th>Name</th>
+    <th>Main Site</th>
+    <th>Billings</th>
+    <th></th>
+</tr>
+<tr>
+    <td>
+        @Html.LabelFor(model => model.Name)
+    </td>
+    <td>
+        @Html.LabelFor(model => model.MainSite)
+    </td>
+    <td>
+        <table class="hovertable">
+            @foreach (var billing in Model.Billings)
+            {
+                @Html.Partial("_Billing", billing)
+            }
+            
+            @Html.ActionLink("Add Billing", "Create", "Billings")
+            
+        </table>
+    </td>
+    <td></td>
+</tr>
 

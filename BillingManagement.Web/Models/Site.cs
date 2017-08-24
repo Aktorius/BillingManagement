@@ -10,5 +10,7 @@ namespace BillingManagement.Web.Models
         public bool MainSite { get; set; }
 
         public int CompanyId { get; set; }
+
+        public IEnumerable<Billing> Billings { get; set; }
     }
 }

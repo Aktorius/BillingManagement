@@ -22,23 +22,14 @@ namespace BillingManagement.Web.Controllers
             foreach (var company in companies)
             {
                 company.SitesList = _companyService.GetSitesForCompany(company.Id);
+
+                foreach (var site in company.SitesList)
+                {
+                    site.Billings = _companyService.GetBillingsForSite(site.Id);
+                }
             }
 
             return View(companies);
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
         }
     }
 }
