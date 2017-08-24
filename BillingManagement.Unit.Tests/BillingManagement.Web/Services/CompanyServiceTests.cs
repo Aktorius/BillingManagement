@@ -4,7 +4,6 @@ using System.Linq;
 using BillingManagement.Business.Repositories;
 using BillingManagement.Database.Models;
 using BillingManagement.Web.Services;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using NUnit.Framework;
 using Assert = NUnit.Framework.Assert;
@@ -165,11 +164,17 @@ namespace BillingManagement.Unit.Tests.BillingManagement.Web.Services
             {
                 new Billing()
                 {
-                    BillingId = 43
+                    BillingId = 43,
+                    BillingPhone = "0121",
+                    DateTo = DateTime.Now,
+                    DateFrom = DateTime.Now
                 },
                 new Billing()
                 {
-                    BillingId = 101
+                    BillingId = 101,
+                    BillingPhone = "0121",
+                    DateTo = DateTime.Now,
+                    DateFrom = DateTime.Now
                 }
             };
 

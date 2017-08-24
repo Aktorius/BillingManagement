@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
 using BillingManagement.Business.Repositories;
 using BillingManagement.Web.Models;
 
@@ -24,6 +23,7 @@ namespace BillingManagement.Web.Services
         {
             _companyRepository = companyRepository;
             _siteRepository = siteRepository;
+            _billingRepository = billingRepository;
         }
 
         public IEnumerable<Company> GetAllCompanies()
@@ -58,7 +58,21 @@ namespace BillingManagement.Web.Services
 
         public IEnumerable<Billing> GetBillingsForSite(int siteId)
         {
-            throw new NotImplementedException();
+            var site = _siteRepository.FindById(siteId);
+
+            if(site == null)
+                throw new Exception("site does not exist");
+
+            var billings = _billingRepository.GetBillingsForSite(site.SiteId);
+
+            return billings.Select(billing => new Billing()
+            {
+                Id = billing.BillingId,
+                BillingPhone = billing.BillingPhone,
+                DateFrom = billing.DateFrom,
+                DateTo = billing.DateTo,
+                Notes = billing.Notes
+            }).ToList();
         }
     }
 }
