@@ -2,7 +2,7 @@
 
 namespace BillingManagement.Business.Repositories
 {
-    public class SiteRepository : IRepository<Site>
+    public class SiteRepository : ISiteRepository
     {
         public Site FindById(int id)
         {

@@ -2,7 +2,7 @@
 
 namespace BillingManagement.Business.Repositories
 {
-    public class BillingRepository : IRepository<Billing>
+    public class BillingRepository : IBillingRepository
     {
         public Billing FindById(int id)
         {

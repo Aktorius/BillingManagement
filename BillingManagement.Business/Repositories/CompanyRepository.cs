@@ -2,7 +2,7 @@
 
 namespace BillingManagement.Business.Repositories
 {
-    public class CompanyRepository : IRepository<Company>
+    public class CompanyRepository : ICompanyRepository
     {
         public Company FindById(int id)
         {
