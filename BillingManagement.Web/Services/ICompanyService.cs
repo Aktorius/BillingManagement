@@ -8,6 +8,8 @@ namespace BillingManagement.Web.Services
         IEnumerable<Company> GetAllCompanies();
         IEnumerable<Site> GetSitesForCompany(int companyId);
         IEnumerable<Billing> GetBillingsForSite(int siteId);
-        bool CreateCompany(string companyName);
+        bool CreateCompany (string companyName);
+        bool EditCompany(int companyId);
+        bool DeleteCompany(int companyId);
     }
 }

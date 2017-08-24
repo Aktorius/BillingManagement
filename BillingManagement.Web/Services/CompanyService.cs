@@ -85,5 +85,15 @@ namespace BillingManagement.Web.Services
                 Name = companyName
             });
         }
+
+        public bool EditCompany(int companyId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool DeleteCompany(int companyId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
