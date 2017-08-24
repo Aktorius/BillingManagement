@@ -9,10 +9,10 @@
 </tr>
 <tr>
     <td>
-        @Html.LabelFor(model => model.Name)
+        @Model.Name
     </td>
     <td>
-        @Html.LabelFor(model => model.MainSite)
+        @Model.MainSite
     </td>
     <td>
         <table class="hovertable">
@@ -25,6 +25,9 @@
             
         </table>
     </td>
-    <td></td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", "Sites") !
+        @Html.ActionLink("Delete", "Delete", "Sites")
+    </td>
 </tr>
 

@@ -7,11 +7,11 @@
     <th>Date From</th>
     <th>Date To</th>
     <th>Notes</th>
-    <th>Actions</th>
+    <th></th>
 </tr>
 <tr>
     <td>
-        @Html.LabelFor(model => model.BillingPhone)
+        @Model.BillingPhone
     </td>
     <td>
         @Model.DateFrom.ToString("dd/MM/yyyy")
@@ -21,7 +21,11 @@
     </td>
     <td>
 
-        @Html.LabelFor(model => model.Notes)
+        @Model.Notes
     </td>
-    <td></td>
+    <td>
+
+        @Html.ActionLink("Edit", "Edit", "Billings") !
+        @Html.ActionLink("Delete", "Delete", "Billings")
+    </td>
 </tr>

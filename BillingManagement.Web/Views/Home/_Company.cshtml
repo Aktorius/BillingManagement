@@ -4,10 +4,11 @@
     <tr>
         <th>Company Name</th>
         <th>Sites</th>
+        <th></th>
     </tr>
     <tr>
         <td>
-            @Html.LabelFor(model => model.Name)
+            @Model.Name
         </td>
 
         <td>
@@ -21,7 +22,9 @@
                         
             </table>
         </td>
-    </tr>
-    <tr>
+        <td>
+            @Html.ActionLink("Edit", "Edit", "Companies") !
+            @Html.ActionLink("Delete", "Delete", "Companies")
+        </td>
     </tr>
 </table>
