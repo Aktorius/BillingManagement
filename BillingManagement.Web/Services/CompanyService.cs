@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using BillingManagement.Business.Repositories;
@@ -38,7 +39,18 @@ namespace BillingManagement.Web.Services
 
         public IEnumerable<Site> GetSitesForCompany(int companyId)
         {
-            throw new System.NotImplementedException();
+            var company = _companyRepository.FindById(companyId);
+
+            if(company == null)
+                throw new Exception("company does not exist");
+
+            var sites = _siteRepository.GetSitesForCompany(company.CompanyId);
+
+            return sites.Select(site => new Site()
+            {
+                Id = site.SiteId,
+                Name = site.Name
+            }).ToList();
         }
     }
 }

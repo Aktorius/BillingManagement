@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using BillingManagement.Business.Repositories;
 using BillingManagement.Database.Models;
 using BillingManagement.Web.Services;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using NUnit.Framework;
+using Assert = NUnit.Framework.Assert;
 
 namespace BillingManagement.Unit.Tests.BillingManagement.Web.Services
 {
@@ -88,6 +91,10 @@ namespace BillingManagement.Unit.Tests.BillingManagement.Web.Services
         public void GetSitesForCompany_Should_Return_An_List_Of_Sites()
         {
             // Given
+            var company = new Company()
+            {
+                CompanyId = 42
+            };
             var sites = new List<Site>()
             {
                 new Site()
@@ -110,6 +117,7 @@ namespace BillingManagement.Unit.Tests.BillingManagement.Web.Services
                 }
             };
 
+            _companyRepositoryMock.Setup(x => x.FindById(It.IsAny<int>())).Returns(company);
             _siteRepositoryMock.Setup(x => x.GetSitesForCompany(It.IsAny<int>())).Returns(sites);
 
             // When
@@ -119,6 +127,27 @@ namespace BillingManagement.Unit.Tests.BillingManagement.Web.Services
             Assert.AreEqual(2, result.Count);
             Assert.AreEqual(404, result[0].Id);
             Assert.AreEqual(425, result[1].Id);
+        }
+
+        [Test]
+        public void GetSitesForCompany_Should_Throw_An_Exception_When_Company_Does_Not_Exist()
+        {
+            //Given
+            _companyRepositoryMock.Setup(x => x.FindById(It.IsAny<int>())).Returns((Company) null);
+            bool success = false;
+
+            // When
+            try
+            {
+                _companyService.GetSitesForCompany(42);
+            }
+            catch (Exception e)
+            {
+                success = true;
+            }
+
+            // Then
+            Assert.IsTrue(success);
         }
     }
 }
