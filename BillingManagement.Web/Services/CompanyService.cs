@@ -26,6 +26,20 @@ namespace BillingManagement.Web.Services
             _billingRepository = billingRepository;
         }
 
+        public Company GetCompany(int companyId)
+        {
+            var company = _companyRepository.FindById(companyId);
+
+            if(company == null)
+                throw new Exception("company does not exist");
+
+            return new Company()
+            {
+                Id = company.CompanyId,
+                Name = company.Name
+            };
+        }
+
         public IEnumerable<Company> GetAllCompanies()
         {
             var companies = _companyRepository.GetAllCompanies().ToList();
@@ -86,14 +100,18 @@ namespace BillingManagement.Web.Services
             });
         }
 
-        public bool EditCompany(int companyId)
+        public bool EditCompany(Company company)
         {
-            throw new NotImplementedException();
-        }
+            var companyToUpdate = _companyRepository.FindById(company.Id);
 
-        public bool DeleteCompany(int companyId)
-        {
-            throw new NotImplementedException();
+            if(companyToUpdate == null)
+                throw new Exception("company dos not exist");
+
+            if (company.Name == companyToUpdate.Name)
+                return false;
+            companyToUpdate.Name = company.Name;
+
+            return _companyRepository.Update(companyToUpdate);
         }
     }
 }

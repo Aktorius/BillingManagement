@@ -44,26 +44,30 @@ namespace BillingManagement.Web.Controllers
             return View(model);
         }
 
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int Id)
         {
-            return View();
+            var company = _companyService.GetCompany(Id);
+
+            return View(company);
         }
 
         [HttpPost]
         public ActionResult Edit(Company model)
         {
+            if (ModelState.IsValid)
+            {
+                if (string.IsNullOrEmpty(model.Name))
+                {
+                    ModelState.AddModelError("Company name cannot be empty", "Company name cannot be empty");
+                    return View(model);
+                }
 
-            return View(model);
-        }
+                var success = _companyService.EditCompany(model);
 
-        public ActionResult Delete(int companyId)
-        {
-            return View();
-        }
+                if(success)
+                    return RedirectToAction("Index", "Home");
+            }
 
-        [HttpPost]
-        public ActionResult Delete(Company model)
-        {
             return View(model);
         }
     }

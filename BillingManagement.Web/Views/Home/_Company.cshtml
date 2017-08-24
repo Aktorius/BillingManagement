@@ -1,6 +1,8 @@
 ﻿@model BillingManagement.Web.Models.Company
     
-@Html.HiddenFor(model => model.Id)
+@{
+    var Id = Model.Id;
+}
 
 <table class="hovertable">
     <tr>
@@ -22,7 +24,8 @@
             </table>
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", "Companies")
+            @Html.HiddenFor(model => model.Id)
+            @Html.ActionLink("Edit", "Edit", new {controller = "Companies", Id})
         </td>
     </tr>
 </table>

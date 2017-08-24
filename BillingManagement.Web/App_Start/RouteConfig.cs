@@ -18,12 +18,6 @@ namespace BillingManagement.Web
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
-
-            routes.MapRoute(
-                name: "Edit",
-                url: "{controller}/Edit/{id}",
-                defaults: new { controller = "Companies", action = "Edit", id = UrlParameter.Optional}
-            );
         }
     }
 }
