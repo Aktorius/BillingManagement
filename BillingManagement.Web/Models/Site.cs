@@ -9,8 +9,6 @@ namespace BillingManagement.Web.Models
         public string Name { get; set; }
         public bool MainSite { get; set; }
 
-        public Company Company { get; set; }
-
-        public IEnumerable<Billing> Billings { get; set; }
+        public int CompanyId { get; set; }
     }
 }

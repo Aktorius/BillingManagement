@@ -14,5 +14,7 @@ namespace BillingManagement.Web.Models
         public DateTime DateFrom { get; set; }
 
         public DateTime DateTo { get; set; }
+
+        public int SiteId { get; set; }
     }
 }

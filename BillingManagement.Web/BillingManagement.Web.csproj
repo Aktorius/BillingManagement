@@ -212,6 +212,10 @@
       <Project>{6d2e5187-2fc8-4c3d-a5a8-61bd65d075e2}</Project>
       <Name>BillingManagement.Repositories</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BillingManagement.Database\BillingManagement.Database.csproj">
+      <Project>{5CFF8602-A193-4B12-8E18-68F524384021}</Project>
+      <Name>BillingManagement.Database</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

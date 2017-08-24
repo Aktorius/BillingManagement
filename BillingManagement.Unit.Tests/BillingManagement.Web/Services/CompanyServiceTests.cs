@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using BillingManagement.Business.Repositories;
 using BillingManagement.Database.Models;
 using BillingManagement.Web.Services;
@@ -72,10 +73,13 @@ namespace BillingManagement.Unit.Tests.BillingManagement.Web.Services
             _companyRepositoryMock.Setup(x => x.GetAllCompanies()).Returns(companies);
 
             // When
-            var result = _companyService.GetAllCompanies();
+            var result = _companyService.GetAllCompanies().ToList();
 
             // Then
             Assert.IsNotEmpty(result);
+            Assert.AreEqual(2, result.Count);
+            Assert.AreEqual(42, result[0].Id);
+            Assert.AreEqual(222, result[1].Id);
         }
     }
 }
