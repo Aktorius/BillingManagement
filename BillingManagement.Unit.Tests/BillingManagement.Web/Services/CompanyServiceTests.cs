@@ -250,6 +250,7 @@ namespace BillingManagement.Unit.Tests.BillingManagement.Web.Services
         {
             // Given
             _companyRepositoryMock.Setup(x => x.CompanyExists(It.IsAny<string>())).Returns(false);
+            _companyRepositoryMock.Setup(x => x.Add(It.IsAny<Company>())).Returns(true);
 
             // When
             var result = _companyService.CreateCompany("company");

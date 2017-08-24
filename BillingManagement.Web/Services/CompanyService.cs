@@ -77,7 +77,13 @@ namespace BillingManagement.Web.Services
 
         public bool CreateCompany(string companyName)
         {
-            throw new NotImplementedException();
+            if(string.IsNullOrEmpty(companyName))
+                throw new Exception("Company name is empty");
+
+            return !_companyRepository.CompanyExists(companyName) && _companyRepository.Add(new Database.Models.Company()
+            {
+                Name = companyName
+            });
         }
     }
 }
