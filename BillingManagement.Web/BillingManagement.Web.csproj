@@ -204,6 +204,8 @@
     <Content Include="Views\Billings\Create.cshtml" />
     <Content Include="Views\Sites\Create.cshtml" />
     <Content Include="Views\Home\_Company.cshtml" />
+    <Content Include="Views\Companies\Edit.cshtml" />
+    <Content Include="Views\Companies\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BillingManagement.Business\BillingManagement.Repositories.csproj">

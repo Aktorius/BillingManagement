@@ -43,5 +43,28 @@ namespace BillingManagement.Web.Controllers
 
             return View(model);
         }
+
+        public ActionResult Edit(int companyId)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Company model)
+        {
+
+            return View(model);
+        }
+
+        public ActionResult Delete(string companyId)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Delete(Company model)
+        {
+            return View(model);
+        }
     }
 }
