@@ -10,5 +10,34 @@ namespace BillingManagement.Web.Controllers
             var model = new Billing();
             return View(model);
         }
+
+        [HttpPost]
+        public ActionResult Create(Billing model)
+        {
+            return View(model);
+        }
+
+        public ActionResult Edit(int billingId)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Billing model)
+        {
+
+            return View(model);
+        }
+
+        public ActionResult Delete(int billingId)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Delete(Billing model)
+        {
+            return View(model);
+        }
     }
 }
