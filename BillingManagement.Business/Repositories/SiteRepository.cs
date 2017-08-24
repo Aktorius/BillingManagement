@@ -8,60 +8,50 @@ namespace BillingManagement.Business.Repositories
 {
     public class SiteRepository : ISiteRepository
     {
+        private readonly DatabaseContext _ctx;
+
+        public SiteRepository()
+        {
+            _ctx = new DatabaseContext();
+            _ctx.Database.Connection.Open();
+        }
+
         public Site FindById(int id)
         {
-            Site site;
-            using (var ctx = new DatabaseContext())
-            {
-                ctx.Database.Connection.Open();
-                site = ctx.Sites.FirstOrDefault(x => x.SiteId == id);
-            }
-            return site;
+            return _ctx.Sites.FirstOrDefault(x => x.SiteId == id);
+
         }
 
         public bool Add(Site entity)
         {
-            int res;
-            using (var ctx = new DatabaseContext())
-            {
-                ctx.Database.Connection.Open();
-                ctx.Sites.Add(entity);
-                res = ctx.SaveChanges();
-            }
-            return res > 0;
+
+            _ctx.Sites.Add(entity);
+            return _ctx.SaveChanges() > 0;
+
         }
 
         public bool Update(Site entity)
         {
-            int res;
-            using (var ctx = new DatabaseContext())
-            {
-                ctx.Database.Connection.Open();
-                ctx.Entry(entity).State = EntityState.Modified;
-                res = ctx.SaveChanges();
-            }
-            return res > 0;
+            _ctx.Entry(entity).State = EntityState.Modified;
+            return _ctx.SaveChanges() > 0;
+
         }
 
         public bool Delete(Site entity)
         {
-            int res;
-            using (var ctx = new DatabaseContext())
-            {
-                ctx.Database.Connection.Open();
-                ctx.Sites.Remove(entity);
-                res = ctx.SaveChanges();
-            }
-            return res > 0;
+            _ctx.Sites.Remove(entity);
+            return _ctx.SaveChanges() > 0;
+        }
+
+        public void Dispose()
+        {
+            _ctx.Dispose();
         }
 
         public IEnumerable<Site> GetSitesForCompany(int companyId)
         {
-            using (var ctx = new DatabaseContext())
-            {
-                ctx.Database.Connection.Open();
-                return ctx.Sites.Where(x => x.CompanyKey == companyId);
-            }
+            return _ctx.Sites.Where(x => x.CompanyKey == companyId);
+
         }
     }
 }

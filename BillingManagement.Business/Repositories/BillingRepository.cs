@@ -8,60 +8,49 @@ namespace BillingManagement.Business.Repositories
 {
     public class BillingRepository : IBillingRepository
     {
+        private readonly DatabaseContext _ctx;
+
+        public BillingRepository()
+        {
+            _ctx = new DatabaseContext();
+            _ctx.Database.Connection.Open();
+        }
+
         public Billing FindById(int id)
         {
-            Billing billing;
-            using (var ctx = new DatabaseContext())
-            {
-                ctx.Database.Connection.Open();
-                billing = ctx.Billings.FirstOrDefault(x => x.BillingId == id);
-            }
-            return billing;
+            return _ctx.Billings.FirstOrDefault(x => x.BillingId == id);
         }
 
         public bool Add(Billing entity)
         {
-            int res;
-            using (var ctx = new DatabaseContext())
-            {
-                ctx.Database.Connection.Open();
-                ctx.Billings.Add(entity);
-                res = ctx.SaveChanges();
-            }
-            return res > 0;
+            _ctx.Billings.Add(entity);
+            return _ctx.SaveChanges() > 0;
+
         }
 
         public bool Update(Billing entity)
         {
-            int res;
-            using (var ctx = new DatabaseContext())
-            {
-                ctx.Database.Connection.Open();
-                ctx.Entry(entity).State = EntityState.Modified;
-                res = ctx.SaveChanges();
-            }
-            return res > 0;
+            _ctx.Entry(entity).State = EntityState.Modified;
+            return _ctx.SaveChanges() > 0;
+
         }
 
         public bool Delete(Billing entity)
         {
-            int res;
-            using (var ctx = new DatabaseContext())
-            {
-                ctx.Database.Connection.Open();
-                ctx.Billings.Remove(entity);
-                res = ctx.SaveChanges();
-            }
-            return res > 0;
+            _ctx.Billings.Remove(entity);
+            return _ctx.SaveChanges() > 0;
+
+        }
+
+        public void Dispose()
+        {
+            _ctx.Dispose();
         }
 
         public IEnumerable<Billing> GetBillingsForSite(int siteId)
         {
-            using (var ctx = new DatabaseContext())
-            {
-                ctx.Database.Connection.Open();
-                return ctx.Billings.Where(x => x.SiteKey == siteId);
-            }
+            return _ctx.Billings.Where(x => x.SiteKey == siteId);
+
         }
     }
 }

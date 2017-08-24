@@ -8,62 +8,49 @@ namespace BillingManagement.Business.Repositories
 {
     public class CompanyRepository : ICompanyRepository
     {
+        private readonly DatabaseContext _ctx;
+
+        public CompanyRepository()
+        {
+            _ctx = new DatabaseContext();
+            _ctx.Database.Connection.Open();
+        }
+
         public Company FindById(int id)
         {
-            Company company;
-            using (var ctx = new DatabaseContext())
-            {
-                ctx.Database.Connection.Open();
-                company = ctx.Companies.FirstOrDefault(x => x.CompanyId == id);
-            }
-            return company;
+            return _ctx.Companies.FirstOrDefault(x => x.CompanyId == id);
+
         }
 
         public bool Add(Company entity)
         {
-            int res;
-            using (var ctx = new DatabaseContext())
-            {
-                ctx.Database.Connection.Open();
-                ctx.Companies.Add(entity);
-                res = ctx.SaveChanges();
-            }
-            return res > 0;
+            _ctx.Companies.Add(entity);
+            return _ctx.SaveChanges() > 0;
+
         }
 
         public bool Update(Company entity)
         {
-            int res;
-            using (var ctx = new DatabaseContext())
-            {
-                ctx.Database.Connection.Open();
-                ctx.Entry(entity).State = EntityState.Modified;
-                res = ctx.SaveChanges();
-            }
-            return res > 0;
+            _ctx.Entry(entity).State = EntityState.Modified;
+            return _ctx.SaveChanges() > 0;
+
         }
 
         public bool Delete(Company entity)
         {
-            int res;
-            using (var ctx = new DatabaseContext())
-            {
-                ctx.Database.Connection.Open();
-                ctx.Companies.Remove(entity);
-                res = ctx.SaveChanges();
-            }
-            return res > 0;
+            _ctx.Companies.Remove(entity);
+            return _ctx.SaveChanges() > 0;
+
+        }
+
+        public void Dispose()
+        {
+            _ctx.Dispose();
         }
 
         public IEnumerable<Company> GetAllCompanies()
         {
-            var companies = new List<Company>();
-            using (var ctx = new DatabaseContext())
-            {
-                ctx.Database.Connection.Open();
-                companies = ctx.Companies.ToList();
-            }
-            return companies;
+            return _ctx.Companies.ToList();
         }
     }
 }
