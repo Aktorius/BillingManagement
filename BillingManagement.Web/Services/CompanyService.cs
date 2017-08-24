@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Security.Claims;
 using BillingManagement.Business.Repositories;
 using BillingManagement.Web.Models;
 
@@ -18,7 +19,7 @@ namespace BillingManagement.Web.Services
 
         public IEnumerable<Company> GetAllCompanies()
         {
-            throw new System.NotImplementedException();
+ 
         }
     }
 }

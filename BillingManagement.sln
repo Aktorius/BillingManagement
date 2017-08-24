@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BillingManagement.Database"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BillingManagement.Web", "BillingManagement.Web\BillingManagement.Web.csproj", "{641FF6C8-D00F-48A7-82D3-F27924F0EFB6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BillingManagement.Business", "BillingManagement.Business\BillingManagement.Business.csproj", "{6D2E5187-2FC8-4C3D-A5A8-61BD65D075E2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BillingManagement.Repositories", "BillingManagement.Business\BillingManagement.Repositories.csproj", "{6D2E5187-2FC8-4C3D-A5A8-61BD65D075E2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{9DD89FCC-E31E-48C9-90B1-56DFA7878A48}"
 EndProject

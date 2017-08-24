@@ -57,18 +57,21 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BillingManagement.Web\Services\CompanyServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="BillingManagement.Web\Services\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\BillingManagement.Business\BillingManagement.Repositories.csproj">
       <Project>{6d2e5187-2fc8-4c3d-a5a8-61bd65d075e2}</Project>
       <Name>BillingManagement.Repositories</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BillingManagement.Database\BillingManagement.Database.csproj">
+      <Project>{5CFF8602-A193-4B12-8E18-68F524384021}</Project>
+      <Name>BillingManagement.Database</Name>
     </ProjectReference>
     <ProjectReference Include="..\BillingManagement.Web\BillingManagement.Web.csproj">
       <Project>{641ff6c8-d00f-48a7-82d3-f27924f0efb6}</Project>
