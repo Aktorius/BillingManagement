@@ -11,7 +11,7 @@ using Assert = NUnit.Framework.Assert;
 namespace BillingManagement.Unit.Tests.BillingManagement.Web.Services
 {
     [TestFixture]
-    class CompanyServiceTests
+    public class CompanyServiceTests
     {
         private Mock<ICompanyRepository> _companyRepositoryMock;
         private Mock<ISiteRepository> _siteRepositoryMock;

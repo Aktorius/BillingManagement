@@ -1,5 +1,7 @@
 ﻿@model BillingManagement.Web.Models.Company
     
+@Html.HiddenFor(model => model.Id)
+
 <table class="hovertable">
     <tr>
         <th>Company Name</th>
@@ -16,15 +18,11 @@
                 @foreach (var site in Model.SitesList)
                 {
                     @Html.Partial("_Site", site)
-                }
-                        
-                @Html.ActionLink("Add Site", "Create", "Sites")
-                        
+                }       
             </table>
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", "Companies") !
-            @Html.ActionLink("Delete", "Delete", "Companies")
+            @Html.ActionLink("Edit", "Edit", "Companies")
         </td>
     </tr>
 </table>

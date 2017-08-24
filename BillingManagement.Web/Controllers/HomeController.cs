@@ -31,5 +31,10 @@ namespace BillingManagement.Web.Controllers
 
             return View(companies);
         }
+
+        public ActionResult EditCompany(int id)
+        {
+            return RedirectToAction("Edit", "Companies", new {id});
+        }
     }
 }

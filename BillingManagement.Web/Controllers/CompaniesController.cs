@@ -44,7 +44,7 @@ namespace BillingManagement.Web.Controllers
             return View(model);
         }
 
-        public ActionResult Edit(int companyId)
+        public ActionResult Edit(int id)
         {
             return View();
         }
@@ -56,7 +56,7 @@ namespace BillingManagement.Web.Controllers
             return View(model);
         }
 
-        public ActionResult Delete(string companyId)
+        public ActionResult Delete(int companyId)
         {
             return View();
         }
