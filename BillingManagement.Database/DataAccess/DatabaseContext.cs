@@ -9,7 +9,7 @@ namespace BillingManagement.Database.DataAccess
         public DbSet<Site> Sites { get; set; }
         public DbSet<Billing> Billings { get; set; }
 
-        public DatabaseContext() : base("name=BillingManagementContext") { }
+        public DatabaseContext() : base("name=BillingManagement") { }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
