@@ -1,4 +1,7 @@
-﻿using BillingManagement.Database.Models;
+﻿using System.Data.Entity;
+using System.Linq;
+using BillingManagement.Database.DataAccess;
+using BillingManagement.Database.Models;
 
 namespace BillingManagement.Business.Repositories
 {
@@ -6,22 +9,49 @@ namespace BillingManagement.Business.Repositories
     {
         public Billing FindById(int id)
         {
-            throw new System.NotImplementedException();
+            Billing billing;
+            using (var ctx = new DatabaseContext())
+            {
+                ctx.Database.Connection.Open();
+                billing = ctx.Billings.FirstOrDefault(x => x.BillingId == id);
+            }
+            return billing;
         }
 
         public bool Add(Billing entity)
         {
-            throw new System.NotImplementedException();
+            int res;
+            using (var ctx = new DatabaseContext())
+            {
+                ctx.Database.Connection.Open();
+                ctx.Billings.Add(entity);
+                res = ctx.SaveChanges();
+            }
+            return res > 0;
         }
 
         public bool Update(Billing entity)
         {
-            throw new System.NotImplementedException();
+            int res;
+            using (var ctx = new DatabaseContext())
+            {
+                ctx.Database.Connection.Open();
+                ctx.Entry(entity).State = EntityState.Modified;
+                res = ctx.SaveChanges();
+            }
+            return res > 0;
         }
 
         public bool Delete(Billing entity)
         {
-            throw new System.NotImplementedException();
+            int res;
+            using (var ctx = new DatabaseContext())
+            {
+                ctx.Database.Connection.Open();
+                ctx.Billings.Remove(entity);
+                res = ctx.SaveChanges();
+            }
+            return res > 0;
         }
     }
 }

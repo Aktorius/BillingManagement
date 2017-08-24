@@ -1,4 +1,8 @@
-﻿using BillingManagement.Database.Models;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using BillingManagement.Database.DataAccess;
+using BillingManagement.Database.Models;
 
 namespace BillingManagement.Business.Repositories
 {
@@ -6,22 +10,60 @@ namespace BillingManagement.Business.Repositories
     {
         public Company FindById(int id)
         {
-            throw new System.NotImplementedException();
+            Company company;
+            using (var ctx = new DatabaseContext())
+            {
+                ctx.Database.Connection.Open();
+                company = ctx.Companies.FirstOrDefault(x => x.CompanyId == id);
+            }
+            return company;
         }
 
         public bool Add(Company entity)
         {
-            throw new System.NotImplementedException();
+            int res;
+            using (var ctx = new DatabaseContext())
+            {
+                ctx.Database.Connection.Open();
+                ctx.Companies.Add(entity);
+                res = ctx.SaveChanges();
+            }
+            return res > 0;
         }
 
         public bool Update(Company entity)
         {
-            throw new System.NotImplementedException();
+            int res;
+            using (var ctx = new DatabaseContext())
+            {
+                ctx.Database.Connection.Open();
+                ctx.Entry(entity).State = EntityState.Modified;
+                res = ctx.SaveChanges();
+            }
+            return res > 0;
         }
 
         public bool Delete(Company entity)
         {
-            throw new System.NotImplementedException();
+            int res;
+            using (var ctx = new DatabaseContext())
+            {
+                ctx.Database.Connection.Open();
+                ctx.Companies.Remove(entity);
+                res = ctx.SaveChanges();
+            }
+            return res > 0;
+        }
+
+        public IEnumerable<Company> GetAllCompanies()
+        {
+            var companies = new List<Company>();
+            using (var ctx = new DatabaseContext())
+            {
+                ctx.Database.Connection.Open();
+                companies = ctx.Companies.ToList();
+            }
+            return companies;
         }
     }
 }
