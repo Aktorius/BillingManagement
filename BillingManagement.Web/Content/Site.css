@@ -30,6 +30,7 @@ table.hovertable {
     border-width: 1px;
     border-color: #999999;
     border-collapse: collapse;
+    margin-bottom: 5px;
 }
 
     table.hovertable th {

@@ -74,5 +74,10 @@ namespace BillingManagement.Web.Services
                 Notes = billing.Notes
             }).ToList();
         }
+
+        public bool CreateCompany(Company company)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
