@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.Remoting.Messaging;
 using System.Web.Mvc;
 using BillingManagement.Web.Models;
 using BillingManagement.Web.Services;
@@ -34,6 +35,10 @@ namespace BillingManagement.Web.Controllers
                     ModelState.AddModelError("Company name cannot be empty", "Company name cannot be empty");
                     return View(model);
                 }
+                var success = _companyService.CreateCompany(model.Name);
+
+                if (success)
+                    return RedirectToAction("Index", "Home");
             }
 
             return View(model);

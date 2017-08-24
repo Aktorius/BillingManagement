@@ -55,7 +55,7 @@ namespace BillingManagement.Business.Repositories
 
         public bool CompanyExists(string companyName)
         {
-            return _ctx.Companies.First(x => x.Name == companyName) != null;
+            return _ctx.Companies.FirstOrDefault(x => x.Name == companyName) != null;
         }
     }
 }
