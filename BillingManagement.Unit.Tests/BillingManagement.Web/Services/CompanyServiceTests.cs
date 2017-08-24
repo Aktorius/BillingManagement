@@ -12,14 +12,16 @@ namespace BillingManagement.Unit.Tests.BillingManagement.Web.Services
     class CompanyServiceTests
     {
         private Mock<ICompanyRepository> _companyRepositoryMock;
+        private Mock<ISiteRepository> _siteRepositoryMock;
         private ICompanyService _companyService;
 
         [SetUp]
         public void Setup()
         {
             _companyRepositoryMock = new Mock<ICompanyRepository>();
+            _siteRepositoryMock = new Mock<ISiteRepository>();
 
-            _companyService = new CompanyService(_companyRepositoryMock.Object);
+            _companyService = new CompanyService(_companyRepositoryMock.Object, _siteRepositoryMock.Object);
         }
 
         [Test]
@@ -80,6 +82,43 @@ namespace BillingManagement.Unit.Tests.BillingManagement.Web.Services
             Assert.AreEqual(2, result.Count);
             Assert.AreEqual(42, result[0].Id);
             Assert.AreEqual(222, result[1].Id);
+        }
+
+        [Test]
+        public void GetSitesForCompany_Should_Return_An_List_Of_Sites()
+        {
+            // Given
+            var sites = new List<Site>()
+            {
+                new Site()
+                {
+                    SiteId = 404,
+                    CompanyKey = 42,
+                    Name = "The Universe",
+                    Billings = new List<Billing>()
+                    {
+                        new Billing()
+                        {
+                            BillingId = 101,
+                            SiteKey = 404
+                        }
+                    }
+                },
+                new Site()
+                {
+                    SiteId = 425
+                }
+            };
+
+            _siteRepositoryMock.Setup(x => x.GetSitesForCompany(It.IsAny<int>())).Returns(sites);
+
+            // When
+            var result = _companyService.GetSitesForCompany(42).ToList();
+
+            // Then
+            Assert.AreEqual(2, result.Count);
+            Assert.AreEqual(404, result[0].Id);
+            Assert.AreEqual(425, result[1].Id);
         }
     }
 }

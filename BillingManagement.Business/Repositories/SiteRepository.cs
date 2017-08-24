@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using BillingManagement.Database.DataAccess;
 using BillingManagement.Database.Models;
@@ -52,6 +53,15 @@ namespace BillingManagement.Business.Repositories
                 res = ctx.SaveChanges();
             }
             return res > 0;
+        }
+
+        public IEnumerable<Site> GetSitesForCompany(int companyId)
+        {
+            using (var ctx = new DatabaseContext())
+            {
+                ctx.Database.Connection.Open();
+                return ctx.Sites.Where(x => x.CompanyKey == companyId);
+            }
         }
     }
 }

@@ -8,14 +8,18 @@ namespace BillingManagement.Web.Services
 {
     public class CompanyService : ICompanyService
     {
-        private ICompanyRepository _companyRepository;
+        private readonly ICompanyRepository _companyRepository;
+        private readonly ISiteRepository _siteRepository;
 
         public CompanyService() 
-            : this(new CompanyRepository()) { }
+            : this(new CompanyRepository(),
+                  new SiteRepository()) { }
 
-        public CompanyService(ICompanyRepository companyRepository)
+        public CompanyService(ICompanyRepository companyRepository,
+                              ISiteRepository siteRepository)
         {
             _companyRepository = companyRepository;
+            _siteRepository = siteRepository;
         }
 
         public IEnumerable<Company> GetAllCompanies()
@@ -30,6 +34,11 @@ namespace BillingManagement.Web.Services
                 Id = company.CompanyId,
                 Name = company.Name
             }).ToList();
+        }
+
+        public IEnumerable<Site> GetSitesForCompany(int companyId)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
