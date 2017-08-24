@@ -7,5 +7,6 @@ namespace BillingManagement.Web.Services
     {
         IEnumerable<Company> GetAllCompanies();
         IEnumerable<Site> GetSitesForCompany(int companyId);
+        IEnumerable<Billing> GetBillingsForSite(int siteId);
     }
 }

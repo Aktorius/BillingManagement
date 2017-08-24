@@ -11,13 +11,16 @@ namespace BillingManagement.Web.Services
     {
         private readonly ICompanyRepository _companyRepository;
         private readonly ISiteRepository _siteRepository;
+        private readonly IBillingRepository _billingRepository;
 
         public CompanyService() 
             : this(new CompanyRepository(),
-                  new SiteRepository()) { }
+                  new SiteRepository(),
+                  new BillingRepository()) { }
 
         public CompanyService(ICompanyRepository companyRepository,
-                              ISiteRepository siteRepository)
+                              ISiteRepository siteRepository,
+                              IBillingRepository billingRepository)
         {
             _companyRepository = companyRepository;
             _siteRepository = siteRepository;
@@ -51,6 +54,11 @@ namespace BillingManagement.Web.Services
                 Id = site.SiteId,
                 Name = site.Name
             }).ToList();
+        }
+
+        public IEnumerable<Billing> GetBillingsForSite(int siteId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

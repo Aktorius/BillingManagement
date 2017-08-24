@@ -16,6 +16,7 @@ namespace BillingManagement.Unit.Tests.BillingManagement.Web.Services
     {
         private Mock<ICompanyRepository> _companyRepositoryMock;
         private Mock<ISiteRepository> _siteRepositoryMock;
+        private Mock<IBillingRepository> _billingRepositoryMock;
         private ICompanyService _companyService;
 
         [SetUp]
@@ -23,8 +24,9 @@ namespace BillingManagement.Unit.Tests.BillingManagement.Web.Services
         {
             _companyRepositoryMock = new Mock<ICompanyRepository>();
             _siteRepositoryMock = new Mock<ISiteRepository>();
+            _billingRepositoryMock = new Mock<IBillingRepository>();
 
-            _companyService = new CompanyService(_companyRepositoryMock.Object, _siteRepositoryMock.Object);
+            _companyService = new CompanyService(_companyRepositoryMock.Object, _siteRepositoryMock.Object, _billingRepositoryMock.Object);
         }
 
         [Test]
