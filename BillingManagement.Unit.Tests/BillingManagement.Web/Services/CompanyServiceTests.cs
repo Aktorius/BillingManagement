@@ -151,5 +151,59 @@ namespace BillingManagement.Unit.Tests.BillingManagement.Web.Services
             // Then
             Assert.IsTrue(success);
         }
+
+        [Test]
+        public void GetBillingsForSite_Should_Return_A_List_Of_Billings()
+        {
+            // Given
+            var site = new Site()
+            {
+                SiteId = 42
+            };
+
+            var billings = new List<Billing>()
+            {
+                new Billing()
+                {
+                    BillingId = 43
+                },
+                new Billing()
+                {
+                    BillingId = 101
+                }
+            };
+
+            _siteRepositoryMock.Setup(x => x.FindById(It.IsAny<int>())).Returns(site);
+            _billingRepositoryMock.Setup(x => x.GetBillingsForSite(site.SiteId)).Returns(billings);
+
+            // When
+            var results = _companyService.GetBillingsForSite(site.SiteId).ToList();
+
+            // Then
+            Assert.IsNotEmpty(results);
+            Assert.AreEqual(43, results[0].Id);
+            Assert.AreEqual(101, results[1].Id);
+        }
+
+        [Test]
+        public void GetBillingsForSite_Should_Throw_An_Exception_If_Site_Is_Not_Found()
+        {
+            //Given
+            _siteRepositoryMock.Setup(x => x.FindById(It.IsAny<int>())).Returns((Site)null);
+            bool success = false;
+
+            // When
+            try
+            {
+                _companyService.GetBillingsForSite(42);
+            }
+            catch (Exception e)
+            {
+                success = true;
+            }
+
+            // Then
+            Assert.IsTrue(success);
+        }
     }
 }
