@@ -19,6 +19,25 @@ namespace BillingManagement.Web.Controllers
             _companyService = companyService;
         }
 
+        public ActionResult Details(int id)
+        {
+            var company = _companyService.GetCompany(id);
+
+            if(company == null)
+                throw new Exception("Company not found");
+
+            var sites = _companyService.GetSitesForCompany(company.Id);
+            
+            var model = new Company()
+            {
+                Name = company.Name,
+                Id = company.Id,
+                SitesList = sites
+            };
+
+            return View(model);
+        }
+
         public ActionResult Create()
         {
             var model = new Company();
